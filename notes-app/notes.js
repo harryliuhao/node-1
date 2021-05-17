@@ -6,10 +6,11 @@ const getNotes=function() {
 const addNote=function(title,body){
     const notes=loadNotes()
     console.log('loaded notes', notes)
-    const dupNotes=notes.filter(function(note){
-        return note.title===title
-    })
-
+    // const dupNotes=notes.filter(function(note){
+    //     return note.title===title
+    // })
+    const dupNotes=notes.filter((note)=>note.title===title)
+    
     if (dupNotes.length===0){
         notes.push({
             title: title,
