@@ -39,5 +39,32 @@ yargs.command({
     }
 })
 
+yargs.command({
+    command: 'list',
+    describe: 'list all notes',
+    builder:{
+
+    },
+    handler: function(){
+        notes.listNotes()
+    }
+})
+
+yargs.command({
+    command: 'find',
+    describe: 'find a note',
+    builder:{
+        title:{
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+
+        }
+    },
+    handler: function(argv){
+        notes.findNotes(argv.title)
+    }
+})
+
 //dummy executor
 yargs.parse()
