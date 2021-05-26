@@ -70,6 +70,9 @@ const listNotes=function(){
 const findNotes=function(title){
     const notes=loadNotes()
     const findNote=notes.find(note=>note.title==title)
+    
+    debugger
+    
     if(findNote){
         console.log(chalk.bgGreen(findNote.title))
     } else {
