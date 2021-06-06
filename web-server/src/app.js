@@ -1,20 +1,30 @@
 const path=require('path')
 const express=require('express')
+const hbs=require('hbs')
 
 const app=express()
 const pubDir=path.join(__dirname,'../public')
+const viewDir=path.join(__dirname, '../templates/views')
+const partialDir=path.join(__dirname, '../templates/partials')
 
+//configurations
 app.set('view engine','hbs')
+app.set('views', viewDir)
+hbs.registerPartials(partialDir)
+
 app.use(express.static(pubDir))
 
 app.get('', (req, res)=>{
-    res.send('index')
+    res.render('index', {
+        title: "weather app",
+        location: "Virginia"
+    })
 })
 
 app.get('/help',(req, res)=>{
-    res.send({
-        contact: 'fox',
-        phone: 5432
+    res.render('help', {
+        helpMsg: "reload your browser",
+        location: "Maryland"
     })
 })
 
