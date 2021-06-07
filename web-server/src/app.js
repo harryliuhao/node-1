@@ -23,6 +23,7 @@ app.get('', (req, res)=>{
 
 app.get('/help',(req, res)=>{
     res.render('help', {
+        title: "help page",
         helpMsg: "reload your browser",
         location: "Maryland"
     })
@@ -30,8 +31,16 @@ app.get('/help',(req, res)=>{
 
 app.get('/weather', (req,res)=>{
     res.send({
+        title: 'weather info',
         location: 'Oakton, VA',
         temporature: 79
+    })
+})
+
+app.get('*',(req, res)=>{
+    res.render('help', {
+        title: "page not found",
+        helpMsg: "The page your are looking for does not exist."
     })
 })
 app.listen(3000, ()=>{
