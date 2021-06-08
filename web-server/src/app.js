@@ -1,6 +1,8 @@
 const path=require('path')
 const express=require('express')
 const hbs=require('hbs')
+const geocode=require('./utils/geocode')
+const forecast=require('./utils/forecast')
 
 const app=express()
 const pubDir=path.join(__dirname,'../public')
@@ -30,11 +32,27 @@ app.get('/help',(req, res)=>{
 })
 
 app.get('/weather', (req,res)=>{
-    res.send({
-        title: 'weather info',
-        location: 'Oakton, VA',
-        temporature: 79
+    if(!req.query.location){
+        return res.send({
+            error: "Please provide a location"
+        }) 
+    }
+    geocode(req.query.location,(error,data)=>{
+
+        forecast(data.latitude,data.longitude,(error,weatherData)=>{
+            res.render('index', {
+                title: "weather app",
+                location: data.place,
+                condition: weatherData.condition,
+                temp: weatherData.temp,
+                rainChance: weatherData.rainChance,
+
+
+            })
+            
+        })
     })
+
 })
 
 app.get('*',(req, res)=>{
