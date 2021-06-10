@@ -5,14 +5,23 @@
     <title>{{title}} </title>
     <link rel="icon" href="/img/weather.png">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/ang.js"></script>
+
 </head>
 <body>
     <div class="main-content">
         {{>header}}
         <img class="weather" src="/img/sky.jpg" >
-        <p>Current weather for {{location}}: {{condition}}, {{temp}}F and chance of rain is {{rainChance}}%</p>
+
+        <form>
+            <input placeholder="location">
+            <button>Search</button>
+        </form>
+
+        <p id="msg-1"></p>
+        <p id="msg-2"></p>
+
     </div>
     {{>footer}}
+    <script src="/js/ang.js"></script>
 </body>
 </html>

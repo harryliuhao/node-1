@@ -37,17 +37,19 @@ app.get('/weather', (req,res)=>{
             error: "Please provide a location"
         }) 
     }
-    geocode(req.query.location,(error,data)=>{
+    geocode(req.query.location,(error,data={})=>{
+        if (error) {
+            res.send(error)
+        }
 
-        forecast(data.latitude,data.longitude,(error,weatherData)=>{
-            res.render('index', {
-                title: "weather app",
-                location: data.place,
-                condition: weatherData.condition,
-                temp: weatherData.temp,
-                rainChance: weatherData.rainChance,
-
-
+        forecast(data.latitude,data.longitude,(error,weatherData={})=>{
+            if(error) {
+                res.send(error)
+            }
+            
+            res.send({
+                forecast: weatherData.condition+'. '+weatherData.temp+'F and chance of rain is '+weatherData.rainChance+'%',
+                location: data.place
             })
             
         })
