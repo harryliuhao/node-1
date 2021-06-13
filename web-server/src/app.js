@@ -18,14 +18,14 @@ app.use(express.static(pubDir))
 
 app.get('', (req, res)=>{
     res.render('index', {
-        title: "weather app",
+        title: "Weather",
         location: "Virginia"
     })
 })
 
 app.get('/help',(req, res)=>{
     res.render('help', {
-        title: "help page",
+        title: "Help page",
         helpMsg: "reload your browser",
         location: "Maryland"
     })
@@ -46,10 +46,11 @@ app.get('/weather', (req,res)=>{
             if(error) {
                 res.send(error)
             }
-            
+
             res.send({
                 forecast: weatherData.condition+'. '+weatherData.temp+'F and chance of rain is '+weatherData.rainChance+'%',
-                location: data.place
+                location: data.place,
+                weatherIcon: weatherData.weatherIcon
             })
             
         })

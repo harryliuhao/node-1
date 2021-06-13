@@ -9,11 +9,13 @@ const forecast=(latitude, longitude,callback)=>{
         } else if (!response.body.current) {
             callback('No weather info found', undefined)
         } else {
+
             callback(undefined,{
 
                 temp:response.body.current.temperature, 
                 rainChance:response.body.current.precip*100,
-                condition:response.body.current.weather_descriptions[0]
+                condition:response.body.current.weather_descriptions[0],
+                weatherIcon: response.body.current.weather_icons[0]
             })
         }
 
